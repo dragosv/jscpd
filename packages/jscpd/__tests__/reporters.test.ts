@@ -32,6 +32,15 @@ describe('jscpd reporters', () => {
 		});
 	});
 
+  describe('SARIF', () => {
+
+    it('should save sarif with report', async () => {
+      const log = (console.log as any);
+      await jscpd(['', '', pathToFixtures + '/clike/file2.c', '--reporters', 'sarif']);
+      expect(log.calledWith(green('JSON report saved to report/jscpd-report.sarif'))).to.be.ok;
+    });
+  });
+
 	describe('CSV', () => {
 
 		it('should save csv with report', async () => {
