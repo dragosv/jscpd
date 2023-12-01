@@ -1,8 +1,9 @@
 import {ensureDirSync, writeFileSync} from 'fs-extra';
-import {getOption, IBlamedLines, IClone, IOptions, IStatistic, ITokenLocation} from '@jscpd/core';
+import {getOption, IClone, IOptions, IStatistic} from '@jscpd/core';
 import {green} from 'colors/safe';
 import {join} from "path";
 import {IReporter} from "@jscpd/finder";
+import {getPath} from "@jscpd/finder/src/utils/reports";
 
 interface IRule {
   id: string,
@@ -17,8 +18,20 @@ interface IRule {
     level: string
   },
   properties: {
-    tags: string[],
-    precision: string
+    id : string,
+    kind : string,
+    name : string,
+    precision: string,
+    problem: {
+      severity : string
+    }
+  }
+}
+
+interface ITool {
+  driver: {
+    name: string,
+    rules: IRule[]
   }
 }
 
@@ -30,6 +43,7 @@ interface ILocation {
     },
     region: {
       startLine: number,
+      endLine: number,
       startColumn: number,
       endColumn: number
     }
@@ -37,42 +51,31 @@ interface ILocation {
 }
 
 interface IResult {
-  ruleId: "D01",
+  ruleId: string,
   ruleIndex: number,
   message: {
     text: string
   },
   locations: ILocation[],
-  partialFingerprints: {
-    primaryLocationLineHash: string,
-    primaryLocationStartColumnFingerprint: string
-  }
-
-  format: string;
-  lines: number;
-  tokens: number;
-  firstFile: {
-    name: string;
-    start: number;
-    end: number;
-    startLoc: ITokenLocation;
-    endLoc: ITokenLocation;
-    blame?: IBlamedLines;
-  };
-  secondFile: {
-    name: string;
-    start: number;
-    end: number;
-    startLoc: ITokenLocation;
-    endLoc: ITokenLocation;
-    blame?: IBlamedLines;
-  };
-  fragment: string;
+  // partialFingerprints: {
+  //   primaryLocationLineHash: string,
+  //   primaryLocationStartColumnFingerprint: string
+  // }
 }
 
+interface IRun {
+  tool: {
+    driver: {
+      name: string,
+      rules: IRule[]
+    }
+  },
+  results: IResult[]
+}
 interface ISarifReport {
-  results: IResult[];
-  statistics: IStatistic;
+  "$schema": string,
+  version: string,
+  runs: IRun[]
 }
 
 export class SarifReporter implements IReporter {
@@ -80,18 +83,27 @@ export class SarifReporter implements IReporter {
   constructor(private options: IOptions) {
   }
 
-  public generateJson(clones: IClone[], statistics: IStatistic): ISarifReport {
+  public generateSarif(clones: IClone[]): ISarifReport {
     return {
-      statistics,
-      results: clones.map(clone => this.cloneFound(clone))
+      $schema: "https://json.schemastore.org/sarif-2.1.0.json",
+      version: "2.1.0",
+      runs: [{
+        tool: {
+          driver: {
+            name: "JSCPD",
+            rules: []
+          }
+        },
+        results: clones.map(clone => this.cloneFound(clone))
+      }]
     };
   }
 
   public report(clones: IClone[], statistic: IStatistic): void {
-    const json = this.generateJson(clones, statistic);
+    const json = this.generateSarif(clones);
     ensureDirSync(getOption('output', this.options));
-    writeFileSync(getOption('output', this.options) + '/jscpd-report.json', JSON.stringify(json, null, '  '));
-    console.log(green(`JSON report saved to ${join(this.options.output, 'jscpd-report.json')}`));
+    writeFileSync(getOption('output', this.options) + '/jscpd-report.sarif', JSON.stringify(json, null, '  '));
+    console.log(green(`SARIF report saved to ${join(this.options.output, 'jscpd-report.sarif')}`));
   }
 
   private cloneFound(clone: IClone): IResult {
@@ -100,27 +112,47 @@ export class SarifReporter implements IReporter {
     const startLineB = clone.duplicationB.start.line;
     const endLineB = clone.duplicationB.end.line;
 
+    const firstLocation: ILocation = {
+      physicalLocation: {
+        artifactLocation: {
+          uri: getPath(clone.duplicationA.sourceId, this.options),
+          uriBaseId: ""
+        },
+        region: {
+          startLine: startLineA,
+          endLine: endLineA,
+          startColumn: 1,
+          endColumn: 1
+        }
+      }
+    }
+
+    const secondLocation: ILocation = {
+      physicalLocation: {
+        artifactLocation: {
+          uri: getPath(clone.duplicationB.sourceId, this.options),
+          uriBaseId: ""
+        },
+        region: {
+          startLine: startLineB,
+          endLine: endLineB,
+          startColumn: 1,
+          endColumn: 1
+        }
+      }
+    }
+
     return {
-      format: clone.format,
-      lines: endLineA - startLineA + 1,
-      fragment: clone.duplicationA.fragment,
-      tokens: 0,
-      firstFile: {
-        name: getPath(clone.duplicationA.sourceId, this.options),
-        start: startLineA,
-        end: endLineA,
-        startLoc: clone.duplicationA.start,
-        endLoc: clone.duplicationA.end,
-        blame: clone.duplicationA.blame,
+      ruleId: "CPD01",
+      ruleIndex: 1,
+      message: {
+        text: "Code duplication found"
       },
-      secondFile: {
-        name: getPath(clone.duplicationB.sourceId, this.options),
-        start: startLineB,
-        end: endLineB,
-        startLoc: clone.duplicationB.start,
-        endLoc: clone.duplicationB.end,
-        blame: clone.duplicationB.blame,
-      },
+      locations: [firstLocation, secondLocation],
+      // partialFingerprints: {
+      //   primaryLocationLineHash: string,
+      //   primaryLocationStartColumnFingerprint: string
+      // }
     };
   }
 }
