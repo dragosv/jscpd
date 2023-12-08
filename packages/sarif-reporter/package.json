@@ -31,7 +31,6 @@
   },
   "scripts": {
     "build": "yarn clean && yarn compile",
-    "postbuild": "ncp ./src/templates ./dist/templates",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepare": "ts-node ../../build-utils/publish-util.ts ./package.json dist/index",

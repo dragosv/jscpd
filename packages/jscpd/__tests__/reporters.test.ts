@@ -4,7 +4,6 @@ import {green, grey} from 'colors/safe';
 import sinon = require('sinon');
 import path = require('path');
 
-
 const pathToFixtures = path.join(__dirname, '/../../../fixtures');
 
 describe('jscpd reporters', () => {
@@ -37,7 +36,7 @@ describe('jscpd reporters', () => {
     it('should save sarif with report', async () => {
       const log = (console.log as any);
       await jscpd(['', '', pathToFixtures + '/clike/file2.c', '--reporters', 'sarif']);
-      expect(log.calledWith(green('JSON report saved to report/jscpd-report.sarif'))).to.be.ok;
+      expect(log.calledWith(green('SARIF report saved to report/jscpd-report.sarif'))).to.be.ok;
     });
   });
 
