@@ -1,5 +1,5 @@
 import {ensureDirSync, writeFileSync} from 'fs-extra';
-import {getOption, IClone, IOptions, IStatistic} from '@jscpd/core';
+import {getOption, IClone, IOptions} from '@jscpd/core';
 import {green} from 'colors/safe';
 import {join} from "path";
 import {IReporter} from "@jscpd/finder";
@@ -99,7 +99,7 @@ export class SarifReporter implements IReporter {
     };
   }
 
-  public report(clones: IClone[], _statistic: IStatistic): void {
+  public report(clones: IClone[]): void {
     const json = this.generateSarif(clones);
     ensureDirSync(getOption('output', this.options));
     writeFileSync(getOption('output', this.options) + '/jscpd-report.sarif', JSON.stringify(json, null, '  '));
