@@ -5,7 +5,7 @@ import {join} from "path";
 import {IReporter} from "@jscpd/finder";
 import {getPath} from "@jscpd/finder/src/utils/reports";
 
-interface IRule {
+export interface IRule {
   id: string,
   name: string,
   shortDescription: {
@@ -28,14 +28,14 @@ interface IRule {
   }
 }
 
-interface ITool {
+export interface ITool {
   driver: {
     name: string,
     rules: IRule[]
   }
 }
 
-interface ILocation {
+export interface ILocation {
   physicalLocation: {
     artifactLocation: {
       uri: string,
@@ -50,7 +50,7 @@ interface ILocation {
   }
 }
 
-interface IResult {
+export interface IResult {
   ruleId: string,
   ruleIndex: number,
   message: {
@@ -63,7 +63,7 @@ interface IResult {
   // }
 }
 
-interface IRun {
+export interface IRun {
   tool: {
     driver: {
       name: string,
@@ -72,7 +72,7 @@ interface IRun {
   },
   results: IResult[]
 }
-interface ISarifReport {
+export interface ISarifReport {
   "$schema": string,
   version: string,
   runs: IRun[]
