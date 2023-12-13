@@ -1,81 +1,137 @@
-import {ensureDirSync, writeFileSync} from 'fs-extra';
-import {getOption, IClone, IOptions} from '@jscpd/core';
-import {green} from 'colors/safe';
-import {join} from "path";
-import {IReporter} from "@jscpd/finder";
-import {getPath} from "@jscpd/finder/src/utils/reports";
+import { ensureDirSync, writeFileSync } from 'fs-extra';
+import { getOption, IClone, IOptions } from '@jscpd/core';
+import { green } from 'colors/safe';
+import { join } from "path";
+import { IReporter } from "@jscpd/finder";
+import { getPath } from "@jscpd/finder/src/utils/reports";
 
 export interface IRule {
-  id: string,
-  name: string,
+  id: string;
+  name: string;
   shortDescription: {
-    text: string
-  },
+    text: string;
+  };
   fullDescription: {
-    text: string
-  },
+    text: string;
+  };
   defaultConfiguration: {
-    level: string
-  },
+    level: string;
+  };
   properties: {
-    id : string,
-    kind : string,
-    name : string,
-    precision: string,
+    id: string;
+    kind: string;
+    name: string;
+    precision: string;
     problem: {
-      severity : string
-    }
-  }
+      severity: string;
+    };
+  };
 }
 
 export interface ITool {
   driver: {
-    name: string,
-    rules: IRule[]
-  }
+    name: string;
+    rules: IRule[];
+  };
 }
 
 export interface ILocation {
   physicalLocation: {
     artifactLocation: {
-      uri: string,
-      uriBaseId: string
-    },
+      uri: string;
+      uriBaseId: string;
+    };
     region: {
-      startLine: number,
-      endLine: number,
-      startColumn: number,
-      endColumn: number
-    }
-  }
+      startLine: number;
+      endLine: number;
+      startColumn: number;
+      endColumn: number;
+    };
+  };
 }
 
 export interface IResult {
-  ruleId: string,
-  ruleIndex: number,
+  ruleId: string;
+  ruleIndex: number;
   message: {
-    text: string
-  },
-  locations: ILocation[],
+    text: string;
+  };
+  locations: ILocation[];
   // partialFingerprints: {
-  //   primaryLocationLineHash: string,
-  //   primaryLocationStartColumnFingerprint: string
-  // }
+  //   primaryLocationLineHash: string;
+  //   primaryLocationStartColumnFingerprint: string;
+  // };
 }
 
 export interface IRun {
   tool: {
     driver: {
-      name: string,
-      rules: IRule[]
-    }
-  },
-  results: IResult[]
+      name: string;
+      rules: IRule[];
+    };
+  };
+  results: IResult[];
 }
 export interface ISarifReport {
-  "$schema": string,
-  version: string,
-  runs: IRun[]
+  "$schema": string;
+  version: string;
+  runs: IRun[];
+}
+import { IReporter, IOptions, IClone } from "@jscpd/core";
+import { ISarifReport, IRun, IResult, ILocation, ITool, IRule } from "@jscpd/finder/src/utils/reports";
+
+export class SarifReporter implements IReporter {
+  constructor(private options: IOptions) { }
+
+  public generateSarif(clones: IClone[]): ISarifReport {
+    return {
+      $schema: "https://json.schemastore.org/sarif-2.1.0.json",
+      version: "2.1.0",
+      runs: [
+        {
+          tool: {
+            driver: {
+              name: "JSCPD",
+              rules: [],
+            },
+          },
+          results: clones.map((clone) => this.cloneFound(clone)),
+        },
+      ],
+    };
+  }
+
+  public report(clones: IClone[]): void {
+    const json = this.generateSarif(clones);
+    // Report generation logic goes here
+  }
+
+  private cloneFound(clone: IClone): IResult {
+    // Clone detection logic goes here
+    return {
+      ruleId: "ruleId",
+      ruleIndex: 0,
+      message: {
+        text: "Clone found",
+      },
+      locations: [
+        {
+          physicalLocation: {
+            artifactLocation: {
+              uri: "file://path/to/file",
+              uriBaseId: "uriBaseId",
+            },
+            region: {
+              startLine: 1,
+              endLine: 5,
+              startColumn: 1,
+              endColumn: 10,
+            },
+          },
+        },
+      ],
+    };
+  }
 }
 
 export class SarifReporter implements IReporter {

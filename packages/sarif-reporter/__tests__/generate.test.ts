@@ -1,39 +1,36 @@
 import {assert, expect} from "chai";
 import { SarifReporter, ISarifReport } from "../src/index";
 import { IClone } from "@jscpd/core";
-import Ajv, {JSONSchemaType, ValidateFunction} from "ajv"
+import Ajv, { ValidateFunction} from "ajv"
 import addFormats from "ajv-formats"
 import $RefParser from "@apidevtools/json-schema-ref-parser";
+
+async function getJsonValidate(): Promise<ValidateFunction> {
+  const ajv = new Ajv();
+  addFormats(ajv);
+
+  const parser = new $RefParser();
+  const sarifSchema = await parser.dereference("schema/sarif-2.1.0.json");
+
+  ajv.addSchema(require("../schema/sarif-2.1.0.json"), sarifSchema.$id);
+
+  return ajv.getSchema(sarifSchema.$id);
+}
 
 describe("SarifReporter", () => {
   let reporter: SarifReporter;
   let clones: IClone[];
   let sarifReport: ISarifReport;
-  let ajv: Ajv;
   let validate: ValidateFunction;
 
   before(async () => {
-    ajv = new Ajv();
-    addFormats(ajv);
-
-    let sarifSchema: $RefParser.JSONSchema;
-    let parser = new $RefParser();
-
-    sarifSchema = await parser.dereference("schema/sarif-2.1.0.json");
-
-    console.log("Schema: " + sarifSchema.$id);
-
-    ajv.addSchema(require("../schema/sarif-2.1.0.json"), sarifSchema.$id);
-
-    validate = ajv.getSchema(sarifSchema.$id);
+    validate = await getJsonValidate();
   });
 
   beforeEach(() => {
     // Initialize the reporter and clones for each test
     reporter = new SarifReporter({});
-    clones = [
-      // Define your test clones here
-    ];
+    clones = [];
   });
 
   afterEach(() => {
@@ -60,3 +57,5 @@ describe("SarifReporter", () => {
     });
   });
 });
+
+
