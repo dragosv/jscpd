@@ -2,6 +2,10 @@
   "extends": "../tsconfig.json",
 
   "include": ["src/**/*",
-    "__tests__/*.test.ts"
-  ]
+    "__tests__/*.test.ts", "schema/*.json"
+  ],
+
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true
+  }
 }

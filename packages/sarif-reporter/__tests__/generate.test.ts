@@ -1,7 +1,8 @@
-import { expect } from "chai";
+import {assert, expect} from "chai";
 import { SarifReporter, ISarifReport } from "../src/index";
 import { IClone } from "@jscpd/core";
 import Ajv, {JSONSchemaType, ValidateFunction} from "ajv"
+import addFormats from "ajv-formats"
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 describe("SarifReporter", () => {
@@ -13,17 +14,18 @@ describe("SarifReporter", () => {
 
   before(async () => {
     ajv = new Ajv();
-    let schema: $RefParser.JSONSchema;
+    addFormats(ajv);
 
-    try {
-      schema = await $RefParser.dereference("__tests__/sarif-2.1.0.json");
-      console.log(schema);
-    }
-    catch(err) {
-      console.error(err);
-    }
+    let sarifSchema: $RefParser.JSONSchema;
+    let parser = new $RefParser();
 
-    validate = ajv.compile(schema);
+    sarifSchema = await parser.dereference("schema/sarif-2.1.0.json");
+
+    console.log("Schema: " + sarifSchema.$id);
+
+    ajv.addSchema(require("../schema/sarif-2.1.0.json"), sarifSchema.$id);
+
+    validate = ajv.getSchema(sarifSchema.$id);
   });
 
   beforeEach(() => {
@@ -34,8 +36,8 @@ describe("SarifReporter", () => {
     ];
   });
 
-  afterEach(async () => {
-    expect(sarifReport).to.not.be.null
+  afterEach(() => {
+    expect(sarifReport).to.not.be.null;
 
     expect(sarifReport.$schema).to.equal("https://json.schemastore.org/sarif-2.1.0.json");
     expect(sarifReport.version).to.equal("2.1.0");
@@ -44,8 +46,11 @@ describe("SarifReporter", () => {
     expect(sarifReport.runs[0].tool.driver.name).to.equal("JSCPD");
     expect(sarifReport.runs[0].results.length).to.equal(clones.length);
 
-    if (!validate(sarifReport)) {
+    const sarifReportAsJson = JSON.stringify(sarifReport);
+    console.log(sarifReportAsJson);
 
+    if (!validate(sarifReportAsJson)) {
+      assert.fail(false, true, "Schema validation failed:" + JSON.stringify(validate.errors));
     }
   });
 
