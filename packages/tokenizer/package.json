@@ -17,10 +17,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/kucherenko/jscpd.git"
-  },
+  "repository": "git+ssh://git@github.com/kucherenko/jscpd.git",
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rm -rf ./dist",
@@ -30,12 +27,12 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@types/spark-md5": "^3.0.2"
+    "@types/spark-md5": "^3.0.4"
   },
   "dependencies": {
-    "@jscpd/core": "^3.5.4",
+    "@jscpd/core": "workspace:^",
     "reprism": "^0.0.11",
-    "spark-md5": "^3.0.1"
+    "spark-md5": "^3.0.2"
   },
   "gitHead": "beaae8ee77d5c7f41d2a0c65187887bd0dc87148"
 }

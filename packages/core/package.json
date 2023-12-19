@@ -33,7 +33,7 @@
     "url": "https://github.com/kucherenko/jscpd/issues"
   },
   "dependencies": {
-    "eventemitter3": "^4.0.4"
+    "eventemitter3": "^5.0.1"
   },
   "gitHead": "beaae8ee77d5c7f41d2a0c65187887bd0dc87148"
 }

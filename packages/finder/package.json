@@ -31,22 +31,24 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@jscpd/core": "^3.5.4",
-    "@jscpd/tokenizer": "^3.5.4",
-    "blamer": "^1.0.4",
-    "bytes": "^3.1.0",
-    "cli-table3": "^0.6.0",
+    "@jscpd/core": "workspace:^",
+    "@jscpd/tokenizer": "workspace:^",
+    "blamer": "^1.0.6",
+    "bytes": "^3.1.2",
+    "cli-table3": "^0.6.3",
     "colors": "1.4.0",
-    "fast-glob": "^3.2.2",
-    "fs-extra": "^9.0.0",
-    "markdown-table": "^2.0.0",
-    "pug": "^3.0.1"
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "markdown-table": "^3.0.3",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
-    "@types/bytes": "^3.1.0",
-    "@types/fs-extra": "^8.1.0",
-    "@types/pug": "^2.0.4",
-    "ts-node": "^8.8.2"
+    "@types/bytes": "^3.1.4",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.10.5",
+    "@types/pug": "^2.0.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "gitHead": "fa06f839d6c5335a1e9dbf0c7387710fcd42eb54"
 }

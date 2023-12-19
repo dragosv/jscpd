@@ -39,7 +39,7 @@
     "url": "https://github.com/kucherenko/jscpd/issues"
   },
   "dependencies": {
-    "badgen": "^3.2.2",
-    "fs-extra": "^9.0.1"
+    "badgen": "^3.2.3",
+    "fs-extra": "^11.2.0"
   }
 }
