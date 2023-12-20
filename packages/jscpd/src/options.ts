@@ -6,50 +6,52 @@ import {getDefaultOptions, IOptions} from '@jscpd/core';
 import {parseFormatsExtensions} from '@jscpd/finder';
 
 const convertCliToOptions = (cli: Command): Partial<IOptions> => {
+  const options = cli.opts();
+
   const result: Partial<IOptions> = {
-    minTokens: cli.minTokens ? parseInt(cli.minTokens) : undefined,
-    minLines: cli.minLines ? parseInt(cli.minLines) : undefined,
-    maxLines: cli.maxLines ? parseInt(cli.maxLines) : undefined,
-    maxSize: cli.maxSize,
-    debug: cli.debug,
-    store: cli.store,
-    pattern: cli.pattern,
-    executionId: cli.executionId,
-    silent: cli.silent,
-    blame: cli.blame,
-    verbose: cli.verbose,
-    cache: cli.cache,
-    output: cli.output,
-    format: cli.format,
-    formatsExts: parseFormatsExtensions(cli.formatsExts),
-    list: cli.list,
-    mode: cli.mode,
-    absolute: cli.absolute,
-    noSymlinks: cli.noSymlinks,
-    skipLocal: cli.skipLocal,
-    ignoreCase: cli.ignoreCase,
-    gitignore: cli.gitignore,
-    exitCode: cli.exitCode,
+    minTokens: options.minTokens ? parseInt(options.minTokens) : undefined,
+    minLines: options.minLines ? parseInt(options.minLines) : undefined,
+    maxLines: options.maxLines ? parseInt(options.maxLines) : undefined,
+    maxSize: options.maxSize,
+    debug: options.debug,
+    store: options.store,
+    pattern: options.pattern,
+    executionId: options.executionId,
+    silent: options.silent,
+    blame: options.blame,
+    verbose: options.verbose,
+    cache: options.cache,
+    output: options.output,
+    format: options.format,
+    formatsExts: parseFormatsExtensions(options.formatsExts),
+    list: options.list,
+    mode: options.mode,
+    absolute: options.absolute,
+    noSymlinks: options.noSymlinks,
+    skipLocal: options.skipLocal,
+    ignoreCase: options.ignoreCase,
+    gitignore: options.gitignore,
+    exitCode: options.exitCode,
   };
 
-  if (cli.threshold !== undefined) {
-    result.threshold = Number(cli.threshold);
+  if (options.threshold !== undefined) {
+    result.threshold = Number(options.threshold);
   }
 
-  if (cli.reporters) {
-    result.reporters = cli.reporters.split(',');
+  if (options.reporters) {
+    result.reporters = options.reporters.split(',');
   }
 
-  if (cli.format) {
-    result.format = cli.format.split(',');
+  if (options.format) {
+    result.format = options.format.split(',');
   }
-  if (cli.ignore) {
-    result.ignore = cli.ignore.split(',');
+  if (options.ignore) {
+    result.ignore = options.ignore.split(',');
   }
-  if(cli.ignorePattern){
-    result.ignorePattern = cli.ignorePattern.split(',');
+  if(options.ignorePattern){
+    result.ignorePattern = options.ignorePattern.split(',');
   }
-  result.path = cli.path ? [cli.path].concat(cli.args) : cli.args;
+  result.path = options.path ? [options.path].concat(options.args) : options.args;
 
   if (result.path.length === 0) {
     delete result.path;
@@ -90,7 +92,7 @@ const readPackageJsonConfig = (): Partial<IOptions> => {
 }
 
 export function prepareOptions(cli: Command): IOptions {
-  const storedConfig: Partial<IOptions> = readConfigJson(cli.config);
+  const storedConfig: Partial<IOptions> = readConfigJson(cli.opts().config);
   const packageJsonConfig: Partial<IOptions> = readPackageJsonConfig();
 
   const argsConfig: Partial<IOptions> = convertCliToOptions(cli);
