@@ -1,11 +1,16 @@
 {
   "name": "@jscpd/finder",
-  "version": "3.5.10",
+  "version": "3.6.0",
   "description": "detector of copy/paste in files",
   "author": "Andrey Kucherenko <kucherenko.andrey@gmail.com>",
   "homepage": "https://github.com/kucherenko/jscpd#readme",
   "license": "MIT",
-  "main": "src/index",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
   "types": "src/index",
   "directories": {
     "src": "src",
@@ -27,8 +32,13 @@
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepare": "ts-node ../../build-utils/publish-util.ts ./package.json dist/index",
+    "test": "nyc yarn run test:unit",
+    "test:unit": "mocha -r source-map-support/register -r ts-node/register __tests__/**/*.test.ts",
     "postpublish": "ts-node ../../build-utils/publish-util.ts ./package.json src/index",
     "prepublishOnly": "yarn build"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "dependencies": {
     "@jscpd/core": "workspace:^",
@@ -45,9 +55,11 @@
   "devDependencies": {
     "@types/bytes": "^3.1.4",
     "@types/fs-extra": "^11.0.4",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.10.5",
     "@types/pug": "^2.0.10",
     "chai": "^4.3.10",
+    "mocha": "^10.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
