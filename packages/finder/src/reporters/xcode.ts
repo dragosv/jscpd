@@ -1,6 +1,6 @@
 import {IClone, IOptions} from '@jscpd/core';
-import {IReporter} from '..';
-import {getPath} from '../utils/reports';
+import {IReporter} from '../interfaces/index.js';
+import {getPath} from '../utils/reports.js';
 
 export class XcodeReporter implements IReporter {
 	constructor(private readonly options: IOptions) {

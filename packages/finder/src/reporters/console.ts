@@ -1,9 +1,9 @@
 import {IClone, IOptions, IStatistic} from '@jscpd/core';
-import {bold, grey} from 'colors/safe';
-import {IReporter} from '..';
-import {convertStatisticToArray} from "../utils/reports";
+import {bold, grey} from 'colors/safe.js';
+import {IReporter} from '../interfaces/index.js';
+import {convertStatisticToArray} from '../utils/reports.js';
 
-const Table = require('cli-table3');
+import * as Table from 'cli-table3';
 
 export class ConsoleReporter implements IReporter {
 	private readonly options;
@@ -14,7 +14,7 @@ export class ConsoleReporter implements IReporter {
 
 	report(clones: IClone[], statistic: IStatistic | undefined = undefined): void {
 		if (statistic && !this.options.silent) {
-			const table = new Table({
+			const table = new Table.default({
         head: ['Format', 'Files analyzed', 'Total lines', 'Total tokens', 'Clones found', 'Duplicated lines', 'Duplicated tokens'],
       });
 			Object.keys(statistic.formats)

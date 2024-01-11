@@ -1,9 +1,9 @@
 import {IClone, IOptions, IStatistic} from '@jscpd/core';
-import {IReporter} from "@jscpd/finder";
+import {IReporter} from '@jscpd/finder';
 import {badgen} from "badgen";
 import {join} from 'path';
 import {ensureDirSync, writeFileSync} from "fs-extra";
-import {green} from "colors/safe";
+import {green} from 'colors/safe.js';
 
 export default class BadgeReporter implements IReporter {
   constructor(private options: IOptions) {

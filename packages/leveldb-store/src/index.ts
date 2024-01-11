@@ -2,8 +2,7 @@ import {IStore} from '@jscpd/core';
 import {IMapFrame} from '@jscpd/tokenizer';
 import {ensureDirSync} from 'fs-extra';
 import { rimraf } from 'rimraf'
-
-const level = require('level');
+import {Level} from 'level';
 
 export default class LevelDbStore implements IStore<IMapFrame> {
   private name: string;
@@ -20,7 +19,7 @@ export default class LevelDbStore implements IStore<IMapFrame> {
       const path = `.jscpd/${name}`;
       rimraf.sync(path);
       ensureDirSync(path);
-      this.dbs[name] = level(path);
+      this.dbs[name] = new Level(path);
     }
   }
 

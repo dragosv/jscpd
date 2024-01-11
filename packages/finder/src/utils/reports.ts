@@ -1,7 +1,7 @@
 import {IClone, IOptions, IStatisticRow, ITokenLocation} from '@jscpd/core';
 import {relative} from "path";
 import {cwd} from "process";
-import {bold, green, grey} from 'colors/safe';
+import {bold, green, grey} from 'colors/safe.js';
 
 export const compareDates = (firstDate: string, secondDate: string): string => {
   const first = new Date(firstDate);

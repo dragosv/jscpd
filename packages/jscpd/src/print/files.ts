@@ -1,4 +1,4 @@
-import {bold, grey} from 'colors/safe';
+import {bold, grey} from 'colors/safe.js';
 import {EntryWithContent} from '@jscpd/finder';
 
 export function printFiles(files: EntryWithContent[]): void {

@@ -1,4 +1,4 @@
-import {bold, white} from 'colors/safe';
+import {bold, white} from 'colors/safe.js';
 import {getSupportedFormats} from '@jscpd/tokenizer';
 
 export function printSupportedFormat(): void {

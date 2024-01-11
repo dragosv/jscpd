@@ -1,2 +1,2 @@
-export * from './blamer';
-export * from './fragment';
+export * from './blamer.js';
+export * from './fragment.js';

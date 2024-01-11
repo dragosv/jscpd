@@ -1,7 +1,7 @@
 import {jscpd} from '../src';
 import {IClone} from '@jscpd/core';
 import {expect} from 'chai';
-import sinon = require('sinon');
+import * as sinon from 'sinon';
 
 const pathToFixtures = __dirname + '/../../../fixtures';
 

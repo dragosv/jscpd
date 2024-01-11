@@ -1,6 +1,6 @@
 import {IClone} from '@jscpd/core';
 import {readFileSync} from "fs";
-import {IHook} from '..';
+import {IHook} from '../interfaces/index.js';
 
 export class FragmentsHook implements IHook {
 

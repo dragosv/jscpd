@@ -1,6 +1,6 @@
 import {IStore, MemoryStore} from '@jscpd/core';
 import {IMapFrame} from '@jscpd/tokenizer';
-import {red} from 'colors/safe';
+import {red} from 'colors/safe.js';
 
 export function getStore(storeName: string | undefined): IStore<IMapFrame> {
   if (storeName) {

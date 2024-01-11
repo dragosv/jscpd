@@ -12,8 +12,8 @@ import {
   Statistic,
 } from '@jscpd/core';
 import {getFormatByFile} from '@jscpd/tokenizer';
-import {EntryWithContent, IHook, IReporter} from './interfaces';
-import {SkipLocalValidator} from './validators';
+import {EntryWithContent, IHook, IReporter} from './interfaces/index.js';
+import {SkipLocalValidator} from './validators/index.js';
 
 export class InFilesDetector {
 

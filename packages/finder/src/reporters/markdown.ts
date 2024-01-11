@@ -1,6 +1,6 @@
 import {getOption, IClone, IOptions, IStatistic} from "@jscpd/core";
 import {ensureDirSync, writeFileSync} from "fs-extra";
-import {green} from "colors/safe";
+import {green} from 'colors/safe.js';
 import {join} from "path";
 import {convertStatisticToArray} from "../utils/reports.js";
 import {markdownTable} from 'markdown-table';

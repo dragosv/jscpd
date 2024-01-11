@@ -1,5 +1,5 @@
 import {DetectorEvents, IEventPayload, IHandler, IOptions, ISubscriber} from '@jscpd/core';
-import {cloneFound} from '../utils/clone-found';
+import {cloneFound} from '../utils/clone-found.js';
 
 export class ProgressSubscriber implements ISubscriber {
 

@@ -2,10 +2,10 @@ import {getOption, IOptions} from '@jscpd/core';
 import {Entry, sync} from 'fast-glob';
 import {getFormatByFile} from '@jscpd/tokenizer';
 import { readFileSync, realpathSync } from 'fs-extra';
-import {grey} from 'colors/safe';
-import {EntryWithContent} from './interfaces';
+import {grey} from 'colors/safe.js';
+import {EntryWithContent} from './interfaces/index.js';
 import {lstatSync, Stats} from "fs";
-import bytes = require('bytes');
+import bytes from 'bytes';
 
 function isFile(path: string): boolean {
   try {

@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import {jscpd} from '../src';
-import {green, grey} from 'colors/safe';
-import sinon = require('sinon');
-import path = require('path');
+import {green, grey} from 'colors/safe.js';
+import * as sinon from 'sinon';
+import * as path from 'path';
 
 
 const pathToFixtures = path.join(__dirname, '/../../../fixtures');
