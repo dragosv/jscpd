@@ -1,6 +1,6 @@
 {
   "name": "@jscpd/html-reporter",
-  "version": "3.5.10",
+  "version": "3.6.0",
   "description": "html reporter for jscpd",
   "keywords": [
     "jscpd",
@@ -11,7 +11,12 @@
   "author": "Andrey Kucherenko <kucherenko.andrey@gmail.com>",
   "homepage": "https://github.com/kucherenko/jscpd#readme",
   "license": "MIT",
-  "main": "dist/index",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
   "types": "dist/index",
   "directories": {
     "src": "src",
@@ -41,16 +46,18 @@
     "url": "https://github.com/kucherenko/jscpd/issues"
   },
   "dependencies": {
-    "@jscpd/finder": "^3.5.10",
+    "@jscpd/core": "workspace:^",
+    "@jscpd/finder": "workspace:^",
     "colors": "1.4.0",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^11.2.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.1",
-    "autoprefixer": "^10.4.14",
+    "@types/fs-extra": "^11.0.4",
+    "autoprefixer": "^10.4.16",
     "install": "^0.13.0",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "postcss": "^8.4.32"
   },
   "gitHead": "87a118f80343288c0099a4e3e47ccd875476bf6c"
 }

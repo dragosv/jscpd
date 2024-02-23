@@ -1,6 +1,6 @@
-import {red} from 'colors/safe';
+import {red} from 'colors/safe.js';
 import {IClone, IOptions, IStatistic} from '@jscpd/core';
-import {IReporter} from '..';
+import {IReporter} from '../interfaces/index.js';
 
 export class ThresholdReporter implements IReporter {
 	constructor(private options: IOptions) {

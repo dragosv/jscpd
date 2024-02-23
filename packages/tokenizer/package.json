@@ -1,11 +1,16 @@
 {
   "name": "@jscpd/tokenizer",
-  "version": "3.5.4",
+  "version": "3.6.0",
   "description": "tokenizer of source code for jscpd",
   "author": "Andrey Kucherenko <kucherenko.andrey@gmail.com>",
   "homepage": "https://github.com/kucherenko/jscpd#readme",
   "license": "MIT",
-  "main": "src/index",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
   "types": "src/index",
   "directories": {
     "lib": "src",
@@ -17,10 +22,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/kucherenko/jscpd.git"
-  },
+  "repository": "git+ssh://git@github.com/kucherenko/jscpd.git",
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rm -rf ./dist",
@@ -30,12 +32,12 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@types/spark-md5": "^3.0.2"
+    "@types/spark-md5": "^3.0.4"
   },
   "dependencies": {
-    "@jscpd/core": "^3.5.4",
+    "@jscpd/core": "workspace:^",
     "reprism": "^0.0.11",
-    "spark-md5": "^3.0.1"
+    "spark-md5": "^3.0.2"
   },
   "gitHead": "beaae8ee77d5c7f41d2a0c65187887bd0dc87148"
 }

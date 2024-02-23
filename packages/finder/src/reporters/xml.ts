@@ -1,9 +1,9 @@
 import {writeFileSync} from 'fs';
 import {ensureDirSync} from 'fs-extra';
-import {IReporter} from '..';
+import {IReporter} from '../interfaces/index.js';
 import {getOption, IClone, IOptions} from '@jscpd/core';
-import {escapeXml, getPath} from '../utils/reports';
-import {green} from 'colors/safe';
+import {escapeXml, getPath} from '../utils/reports.js';
+import {green} from 'colors/safe.js';
 import {join} from "path";
 
 export class XmlReporter implements IReporter {

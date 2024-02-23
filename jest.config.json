@@ -1,0 +1,13 @@
+{
+  "preset": "ts-jest",
+  "bail": 1,
+  "verbose": true,
+  "transformIgnorePatterns": ["node_modules/(?!markdown-table)/"],
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$",
+  "moduleFileExtensions": ["ts", "js", "json", "node"],
+  "testEnvironment": "node",
+  "transform": {
+    "^.+\\.ts?$": "ts-jest",
+    "^.+\\.(js|jsx)?$": "babel-jest"
+  }
+}

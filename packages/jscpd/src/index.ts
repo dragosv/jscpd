@@ -1,5 +1,5 @@
 import { getDefaultOptions, IClone, IOptions, IStore, Statistic } from '@jscpd/core';
-import { grey, italic } from 'colors/safe';
+import { grey, italic } from 'colors/safe.js';
 import { EntryWithContent, getFilesToDetect, InFilesDetector } from '@jscpd/finder';
 import { initCli, initOptionsFromCli } from './init';
 import { printFiles, printOptions, printSupportedFormat } from './print';

@@ -11,7 +11,7 @@ import {
   XmlReporter,
 } from '@jscpd/finder';
 import {IOptions} from '@jscpd/core';
-import {grey, yellow} from 'colors/safe';
+import {grey, yellow} from 'colors/safe.js';
 import HtmlReporter from "@jscpd/html-reporter";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

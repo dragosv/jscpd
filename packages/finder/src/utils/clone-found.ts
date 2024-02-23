@@ -1,6 +1,6 @@
 import {IClone, IOptions} from '@jscpd/core';
-import {red} from 'colors/safe';
-import {getPathConsoleString, getSourceLocation} from './reports';
+import {red} from 'colors/safe.js';
+import {getPathConsoleString, getSourceLocation} from './reports.js';
 
 export function cloneFound(clone: IClone, options: IOptions): void {
 	const {duplicationA, duplicationB, format, isNew} = clone;

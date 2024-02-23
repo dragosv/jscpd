@@ -1,1 +1,1 @@
-export * from './skip-local.validator';
+export * from './skip-local.validator.js';

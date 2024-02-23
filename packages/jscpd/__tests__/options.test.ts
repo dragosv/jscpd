@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {isAbsolute} from 'path';
 import {IClone} from '@jscpd/core';
 import {jscpd, detectClones} from '../src';
-import {bold, yellow} from 'colors/safe';
-import sinon = require('sinon');
+import {bold, yellow} from 'colors/safe.js';
+import * as sinon from 'sinon';
 
 const pathToFixtures = __dirname + '/../../../fixtures';
 

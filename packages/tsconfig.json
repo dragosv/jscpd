@@ -6,6 +6,10 @@
       "@jscpd/*": [
         "*/src"
       ]
-    }
+    },
+    "types": ["mocha", "jest", "node"],
+    "typeRoots": ["../node_modules/@types"],
+    "allowJs": true,
+    "esModuleInterop": true
   }
 }

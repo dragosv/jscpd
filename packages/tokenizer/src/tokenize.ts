@@ -1,8 +1,8 @@
 import * as reprism from 'reprism';
-import {FORMATS} from './formats';
-import {createTokensMaps, TokensMap} from './token-map';
+import {FORMATS} from './formats.js';
+import {createTokensMaps, TokensMap} from './token-map.js';
 import {IOptions, IToken} from '@jscpd/core';
-import {loadLanguages} from './grammar-loader';
+import {loadLanguages} from './grammar-loader.js';
 
 const ignore = {
   ignore: [
@@ -161,7 +161,7 @@ export function createTokenMapBasedOnCode(id: string, data: string, format: stri
     .filter((token) => mode(token, options))
 
   if(ignorePattern) setupIgnorePatterns(format, options.ignorePattern)
-  
+
   if (ignoreCase) {
     return createTokensMaps(id, data, tokens.map(
       (token: IToken): IToken => {

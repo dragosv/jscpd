@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "target": "ES2022", // Node.js 18
+    "allowSyntheticDefaultImports": true, // To provide backwards compatibility, Node.js allows you to import most CommonJS packages with a default import. This flag tells TypeScript that it's okay to use import on CommonJS modules.
+    "resolveJsonModule": false, // ESM doesn't yet support JSON modules.
     "declaration": true,
     "sourceMap": true
   },

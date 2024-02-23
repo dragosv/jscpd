@@ -1,4 +1,4 @@
-import {hash} from './hash';
+import {hash} from './hash.js';
 import {IMapFrame, IToken, ITokensMap} from '@jscpd/core';
 
 const TOKEN_HASH_LENGTH = 20;

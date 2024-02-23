@@ -1,6 +1,6 @@
 {
   "name": "@jscpd/badge-reporter",
-  "version": "3.4.5",
+  "version": "3.5.0",
   "description": "Reporter for jscpd. Generate a badges with copy/paste level.",
   "keywords": [
     "jscpd",
@@ -11,7 +11,12 @@
   "author": "Andrey Kucherenko <kucherenko.andrey@gmail.com>",
   "homepage": "https://github.com/kucherenko/jscpd#readme",
   "license": "MIT",
-  "main": "src/index",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
   "types": "src/index",
   "directories": {
     "src": "src",
@@ -39,7 +44,10 @@
     "url": "https://github.com/kucherenko/jscpd/issues"
   },
   "dependencies": {
-    "badgen": "^3.2.2",
-    "fs-extra": "^9.0.1"
+    "@jscpd/core": "workspace:^",
+    "@jscpd/finder": "workspace:^",
+    "badgen": "^3.2.3",
+    "colors": "^1.4.0",
+    "fs-extra": "^11.2.0"
   }
 }

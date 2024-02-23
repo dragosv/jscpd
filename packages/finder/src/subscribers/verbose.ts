@@ -1,4 +1,4 @@
-import {grey, yellow} from 'colors/safe';
+import {grey, yellow} from 'colors/safe.js';
 import {DetectorEvents, IEventPayload, IHandler, IOptions, ISubscriber} from '@jscpd/core';
 
 export class VerboseSubscriber implements ISubscriber {

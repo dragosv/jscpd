@@ -1,7 +1,10 @@
 {
   "extends": "../tsconfig.json",
 
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*", "__tests__/**/*"],
+
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true
+  }
 }

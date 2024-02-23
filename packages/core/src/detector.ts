@@ -3,7 +3,7 @@ import {IClone, ICloneValidator, IMapFrame, IOptions, IStore, ITokenizer, IToken
 import {LinesLengthCloneValidator} from './validators';
 import {mild} from './mode';
 // TODO replace to own event emitter
-import * as EventEmitter from 'eventemitter3';
+import { EventEmitter } from 'eventemitter3';
 
 export type DetectorEvents = 'CLONE_FOUND' | 'CLONE_SKIPPED' | 'START_DETECTION';
 

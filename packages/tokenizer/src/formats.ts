@@ -1,5 +1,5 @@
 import {extname} from "path";
-import {IFormatMeta} from './interfaces';
+import {IFormatMeta} from './interfaces/format-meta.interface.js';
 
 export const FORMATS: {
 	[key: string]: IFormatMeta;

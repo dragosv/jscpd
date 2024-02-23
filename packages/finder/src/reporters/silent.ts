@@ -1,6 +1,6 @@
-import {bold} from 'colors/safe';
+import {bold} from 'colors/safe.js';
 import {IClone, IStatistic} from '@jscpd/core';
-import {IReporter} from '..';
+import {IReporter} from '../interfaces/index.js';
 
 export class SilentReporter implements IReporter {
 

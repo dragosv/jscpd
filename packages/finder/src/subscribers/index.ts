@@ -1,2 +1,2 @@
-export * from './progress';
-export * from './verbose';
+export * from './progress.js';
+export * from './verbose.js';

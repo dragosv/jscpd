@@ -1,6 +1,6 @@
 import Blamer from 'blamer';
 import {IBlamedLines, IClone} from '@jscpd/core';
-import {IHook} from '..';
+import {IHook} from '../interfaces/index.js';
 
 
 export class BlamerHook implements IHook {
@@ -10,7 +10,7 @@ export class BlamerHook implements IHook {
 	}
 
 	static async blameLines(clone: IClone): Promise<IClone> {
-		const blamer = new Blamer();
+		const blamer = new Blamer.default();
 		const blamedFileA: Record<string, IBlamedLines> = await blamer.blameByFile(clone.duplicationA.sourceId);
 		const blamedFileB: Record<string, IBlamedLines> = await blamer.blameByFile(clone.duplicationB.sourceId);
 		clone.duplicationA.blame = BlamerHook.getBlamedLines(blamedFileA, clone.duplicationA.start.line, clone.duplicationA.end.line);

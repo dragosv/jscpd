@@ -2,7 +2,7 @@ import {join} from 'path';
 import {IClone, IOptions, IStatistic} from '@jscpd/core';
 import {IReporter, JsonReporter} from "@jscpd/finder";
 import {copySync, writeFileSync} from "fs-extra";
-import {green, red} from "colors/safe";
+import {green, red} from 'colors/safe.js';
 import * as pug from "pug";
 
 export default class HtmlReporter implements IReporter {

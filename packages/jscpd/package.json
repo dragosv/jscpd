@@ -1,15 +1,17 @@
 {
   "name": "jscpd",
-  "version": "3.5.10",
+  "version": "3.7.0",
   "description": "detector of copy/paste in files",
   "author": "Andrey Kucherenko <kucherenko.andrey@gmail.com>",
   "homepage": "https://github.com/kucherenko/jscpd#readme",
   "license": "MIT",
-  "main": "src/index",
-  "types": "src/index",
-  "bin": {
-    "jscpd": "./bin/jscpd"
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
   },
+  "types": "src/index",
+  "bin": "./bin/jscpd",
   "directories": {
     "lib": "src",
     "bin": "bin",
@@ -34,20 +36,23 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@jscpd/core": "^3.5.4",
-    "@jscpd/finder": "^3.5.10",
-    "@jscpd/html-reporter": "^3.5.10",
-    "@jscpd/tokenizer": "^3.5.4",
+    "@jscpd/core": "workspace:^",
+    "@jscpd/finder": "workspace:^",
+    "@jscpd/html-reporter": "workspace:^",
+    "@jscpd/tokenizer": "workspace:^",
     "colors": "1.4.0",
-    "commander": "^5.0.0",
-    "fs-extra": "^9.1.0",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
     "gitignore-to-glob": "^0.3.0"
   },
   "devDependencies": {
+    "@jscpd/badge-reporter": "workspace:^",
     "@types/colors": "^1.2.1",
-    "@types/fs-extra": "^8.1.0",
-    "jscpd-badge-reporter": "^1.1.3",
-    "ts-node": "^8.8.2"
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.10.5",
+    "chai": "^4.3.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "preferGlobal": true,
   "gitHead": "87a118f80343288c0099a4e3e47ccd875476bf6c"

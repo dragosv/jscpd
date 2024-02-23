@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import sinon = require('sinon');
-
-const proxyquire = require('proxyquire');
+import * as sinon from 'sinon';
+import proxyquire from 'proxyquire';
 
 const ioredis = sinon.stub();
 

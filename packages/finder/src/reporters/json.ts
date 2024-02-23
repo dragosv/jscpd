@@ -1,9 +1,9 @@
 import {ensureDirSync, writeFileSync} from 'fs-extra';
 import {getOption, IBlamedLines, IClone, IOptions, IStatistic, ITokenLocation} from '@jscpd/core';
-import {getPath} from '../utils/reports';
-import {green} from 'colors/safe';
+import {getPath} from '../utils/reports.js';
+import {green} from 'colors/safe.js';
 import {join} from "path";
-import {IReporter} from '..';
+import {IReporter} from '../interfaces/index.js';
 
 interface IDuplication {
 	format: string;
